@@ -4,14 +4,12 @@ import React, { Component } from 'react';
 export default class ShelfChanger extends Component {
     
     renderOption(shelf) {
-        return (
-            <option key={shelf.shelfKey} value={shelf.shelfKey}>{shelf.shelfTitle}</option>
-        )
+        return ( <option key={shelf.shelfKey} value={shelf.shelfKey}>{shelf.shelfTitle}</option> )
     }
     
     handleChange = (e) => {
         if(this.props.moveBook) {
-            this.props.moveBook(e.target.value, this.props.book.id, this.props.book);
+            this.props.moveBook(e.target.value, this.props.book);
         }
     }
     

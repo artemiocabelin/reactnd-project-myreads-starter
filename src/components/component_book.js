@@ -2,18 +2,8 @@ import React, { Component }from 'react'
 import ShelfChanger from './component_shelf_changer'
 
 class Book extends Component {
-    createImgUrl(imageLinks) {
-        if(!imageLinks.thumbnail) {
-            return imageLinks;
-        } else {
-            return imageLinks.thumbnail;
-        }
-    }
-
     renderAuthor(author) {
-        return (
-            <div key={author} className="book-authors">{author}</div>
-        )
+        return ( <div key={author} className="book-authors">{author}</div> )
     }
 
     listAuthors(authors) {
@@ -28,7 +18,7 @@ class Book extends Component {
             <li>
                 <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.createImgUrl(imageLinks)})` }}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks.thumbnail})` }}></div>
                     <div className="book-shelf-changer">
                     <ShelfChanger book={this.props.book} shelf={shelf} shelves={shelves} moveBook={moveBook} />
                     </div>

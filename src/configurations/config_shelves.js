@@ -1,10 +1,10 @@
 export const shelves = {
     current: {
-        shelfKey: 'current',
+        shelfKey: 'currentlyReading',
         shelfTitle: 'Currently Reading'
     },
     want: {
-        shelfKey: 'want',
+        shelfKey: 'wantToRead',
         shelfTitle: 'Want to Read'
     },
     read: {

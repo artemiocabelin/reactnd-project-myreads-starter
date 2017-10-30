@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import React from 'react'
 import { Route } from 'react-router-dom';
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../services/BooksAPI'
 import '../styles/App.css'
 
 import ShelfList from './component_shelf_list'
 import BookSearch from './component_book_search'
 import { shelves } from '../configurations/config_shelves'
-import { books } from '../configurations/config_books'
 
 class BooksApp extends React.Component {
   state = {
@@ -17,38 +16,32 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     this.setState({shelves})
-    this.setState({books})
+    this.getAllBooks()
   }
 
-  moveBook(value, bookId, book) {
+  getAllBooks() {
+    BooksAPI.getAll().then(data => { this.setState({ books: _.mapKeys(data, 'id') }) })
+  }
+
+  moveBook(value, book) {
     const { books } = this.state;
-    if(books.hasOwnProperty(bookId)) {
-      this.changeShelfValue(value, bookId);
-    } else {
-      this.addBookToState(value, bookId, book);
-    }
+    books.hasOwnProperty(book.id) ? this.changeShelfValue(value, book) : this.addBookToState(value, book);
   }
 
-  changeShelfValue(value, bookId) {
-    const { books } = this.state;
-    let newBooksState = books;
-    newBooksState[bookId]['shelf'] = value;
-    this.setState((state) => ({
-      books: newBooksState
-    }));
-  }
-
-  addBookToState(value, bookId, book) {
+  changeShelfValue(value, book) {
     const { books } = this.state;
     let newBooksState = books;
-    newBooksState[bookId] = {
-      id: book.id,
-      title: book.title,
-      imageLinks: book.imageLinks.thumbnail,
-      authors: book.authors,
-      shelf: value
-    };
-    this.setState({books: newBooksState});
+    newBooksState[book.id]['shelf'] = value;
+    BooksAPI.update(book, value).then(this.setState({ books: newBooksState }))
+  }
+
+  addBookToState(value, book) {
+    const { books } = this.state;
+    let newBooksState = books;
+    let newBook = book;
+    newBook['shelf'] = value;
+    newBooksState[newBook.id] = newBook;
+    BooksAPI.update(book, value).then(this.setState({books: newBooksState}))
   }
 
   render() {

@@ -14,10 +14,7 @@ export default class BookSearch extends Component{
         const value = e.target.value;
         this.setState({query: value});
         if(search_terms.includes(value)) {
-            BooksAPI.search(value, 40)
-                .then((data) => {
-                    this.setState({results: data});
-                })
+            BooksAPI.search(value, 40).then((data) => {this.setState({results: data});})
         }
     }
 

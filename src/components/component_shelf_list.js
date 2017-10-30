@@ -18,11 +18,11 @@ export default class ShelfList extends Component {
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                <div>
-                    {_.map(this.props.shelves, (shelfConfig, shelfKey)=> {
-                        return this.renderShelf(shelfConfig, shelfKey)
-                    })}
-                </div>
+                    <div>
+                        {_.map(this.props.shelves, (shelfConfig, shelfKey)=> {
+                            return this.renderShelf(shelfConfig, shelfKey)
+                        })}
+                    </div>
                 </div>
                 <div className="open-search">
                     <Link to="/search" >Add a Book</Link>

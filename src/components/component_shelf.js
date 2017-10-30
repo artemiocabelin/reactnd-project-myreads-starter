@@ -13,7 +13,7 @@ export default class Shelf extends Component {
     }
     
     render() {
-        const { shelf, books } = this.props;
+        const { books, shelf } = this.props;
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{shelf.shelfTitle}</h2>

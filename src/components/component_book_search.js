@@ -37,7 +37,7 @@ export default class BookSearch extends Component{
                     <div className="search-books-input-wrapper">
                         <input 
                             type="text" 
-                            placeholder="Please see Github Repo for valid search terms: https://goo.gl/GdMrDg"
+                            placeholder="Search title or author. Example: Android, React, Tale (Please see Github Repo for more valid search terms: https://goo.gl/GdMrDg)"
                             value={this.state.query}
                             onChange={(e) => { this.updateSearchResults(e) }}
                         />
